@@ -187,7 +187,7 @@ def sl_grade():
     distribution = [a, h, s, m, f]
     cur = 0
     for c in range(w-1):
-        cur += (distribution[c] * sf_weight[c])
+        cur += (distribution[c] * sl_weight[c])
     get_breakdown(cur, sl_weight[w-1])
 
 ### END cLASSES ###
