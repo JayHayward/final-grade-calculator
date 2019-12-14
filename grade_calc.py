@@ -54,7 +54,7 @@ os_weight = [0.1, 0.1, 0.4, 0.2, 0.2] # quiz, PS, PA, midterm, final
 pl_weight = [0.4, 0.4, 0.2] # assignments, midterms, final
 ds_weight = [0.35, 0.2, 0.1, 0.1, 0.05, 0.2] # homework, midterm, practicum 1, practicum 2, quizlets, final
 ro_weight = [0.3, 0.4, 0.05, 0.25] # homework, lab, attendence, final project
-hc_weight = []
+hc_weight = [0.05, 0.2, 0.10, 0.25, 0.4] # participation, assignments, reading, quizzes, project
 ai_weight = []
 df_weight = [0.1, 0.3, 0.2, 0.2, 0.2] # attendence, projects, labs, midterm, final
 tc_weight = []
@@ -133,7 +133,19 @@ def ro_grade():
     get_breakdown(cur, ro_weight[w-1])
 
 def hc_grade():
-    return(print("HCI coming soon"))
+    print("\nCSCI-3002 Human Computer Interaction")
+    w = len(hc_weight)
+    p = float(input("participation: "))
+    a = float(input("assignments average: "))
+    r = float(input("reading: "))
+    q = float(input("quizes average: "))
+    f = 0
+
+    distribution = [p, a, r, q, f]
+    cur = 0
+    for c in range(w-1):
+        cur += (distribution[c] * hc_weight[c])
+    get_breakdown(cur, hc_weight[w-1])
 
 def ai_grade():
     return(print("AI coming soon"))
