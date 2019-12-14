@@ -25,7 +25,7 @@ def main():
 
 
 def show_classes():
-    print("classes: ")
+    print("Classes: ")
     print("\t1. CSCI-3753 [Operating Systems]")
     print("\t2. CSCI-3155 [Principles of Programming Languages]")
     print("\t3. CSCI-3022 [Data Science]")
@@ -40,7 +40,7 @@ def show_classes():
 
 def get_inp():
     while True:
-        cl = input("\nselect a class: ")
+        cl = input("\nselect a class (1-9): ")
         if cl in ('1','2','3','4','5','6','7','8','9'):
             # print("valid: ", cl)
             return(cl)
@@ -76,6 +76,7 @@ grds = ['A','A-','B+','B','B-','C+','C','C-']
 
 def os_grade():
     print("\nCSCI-3753 Operating Systems")
+    print("Enter your grade for each category. Example: '87'")
     w = len(os_weight)
     q = float(input("quiz average: "))
     ps = float(input("problem set average: "))
@@ -91,6 +92,7 @@ def os_grade():
 
 def pl_grade():
     print("\nCSCI-3155 Principles of Programming Languages")
+    print("Enter your grade for each category. Example: '87'")
     w = len(pl_weight)
     a = float(input("assignment average: "))
     m = float(input("midterm average: "))
@@ -104,6 +106,7 @@ def pl_grade():
 
 def ds_grade():
     print("\nCSCI-3022 Data Science")
+    print("Enter your grade for each category. Example: '87'")
     w = len(ds_weight)
     h = float(input("homework average: "))
     p1 = float(input("practicum 1 grade: "))
@@ -120,6 +123,7 @@ def ds_grade():
 
 def ro_grade():
     print("\nCSCI-3202 Intro to Robotics")
+    print("Enter your grade for each category. Example: '87'")
     w = len(ro_weight)
     h = float(input("homework average: "))
     l = float(input("labs average: "))
@@ -134,6 +138,7 @@ def ro_grade():
 
 def hc_grade():
     print("\nCSCI-3002 Human Computer Interaction")
+    print("Enter your grade for each category. Example: '87'")
     w = len(hc_weight)
     p = float(input("participation: "))
     a = float(input("assignments average: "))
@@ -152,6 +157,7 @@ def ai_grade():
 
 def df_grade():
     print("\nCYBR-5830 Digital Forensics")
+    print("Enter your grade for each category. Example: '87'")
     w = len(df_weight)
     a = float(input("attendence: "))
     p = float(input("projects average: "))
@@ -170,6 +176,7 @@ def tc_grade():
 
 def sl_grade():
     print("\nASTR-2040 Search for Life in the Universe")
+    print("Enter your grade for each category. Example: '87'")
     w = len(sl_weight)
     a = float(input("attendence: "))
     h = float(input("homework average: "))
