@@ -37,9 +37,9 @@ def main():
         elif cl == 2:
             sp20_li_grade()
         elif cl == 3:
-            sp20_pt_grade()
-        elif cl == 4:
             sp20_ru_grade()
+        elif cl == 4:
+            sp20_pt_grade()
 
 
 def show_terms():
@@ -48,7 +48,7 @@ def show_terms():
     print("\t2. Spring 2020")
 
 def show_classes():
-    print("Classes: ")
+    print("Fall Classes: ")
     print("\t1. CSCI-3753 [Operating Systems]")
     print("\t2. CSCI-3155 [Principles of Programming Languages]")
     print("\t3. CSCI-3022 [Data Science]")
@@ -58,13 +58,15 @@ def show_classes():
     print("\t7. ASTR-2040 [Search for Life in the Universe]")
 
 def show_sp20_classes():
-    print("Classes: ")
+    print("Spring 2020 Classes: ")
     print("\t1. CSCI-3202 [Intro to Artificial Intelligence]")
     print("\t2. CSCI-4113 [Linux System Administration]")
+    print("\t3. RUSS-3241 [Russian Sci-Fi]")
+    print("\t4. CYBR-5350 [Penetration Testing]")
 
 def get_term():
     while True:
-        tm = input("\nselect a school term (1-2): ")
+        tm = input("\nSelect a school term (1-2): ")
         tm = int(tm)
         if tm in (1,2):
             return(tm)
@@ -76,7 +78,7 @@ def get_term():
 def get_inp(term_index, term):
     # print(term_index)
     while True:
-        cl = input("\nselect a class (1-{}): ".format(len(term_index)))
+        cl = input("\nSelect a class (1-{}): ".format(len(term_index)))
         cl = int(cl)
         if cl in term_index:
             return(cl)
@@ -99,6 +101,8 @@ sl_weight = [0.05, 0.25, 0.2, 0.2, 0.3] # attendence, homework, assignments, mid
 
 ai_weight = [0.4, 0.2, 0.2, 0.05, 0.05, 0.1] # homework, midterm, endterm, quizlets, participation, practicum
 li_weight = [0.3, 0.15, 0.15, 0.1, 0.3] # labs, midterm, endterm, attendence, practical
+ru_weight = [0.4, 0.1, 0.15, 0.15, 0.2] # reading, attendence, exam 1, exam 2, final
+# pt_weight = [0.3, 0.3, 0.3, 0.1] # assignments, midterm, endterm, final
 
 # cutoffs:
 aa = 93
@@ -273,7 +277,26 @@ def sp20_li_grade():
         cur += (distribution[c] * li_weight[c])
     get_breakdown(cur, li_weight[w-1])
 
+def sp20_ru_grade():
+    print("\nRUSS-3241 Russian Sci-Fi")
+    print("Enter your grade for each category. Example: '87'")
+    w = len(ru_weight)
+    r = float(input("reading check average: "))
+    a = float(input("attendence: "))
+    m1 = float(input("midterm 1: "))
+    m2 = float(input("midterm 2: "))
+    f = 0
 
+    distribution = [r, a, m1, m2, f]
+    cur = 0
+    for c in range(w-1):
+        cur += (distribution[c] * ru_weight[c])
+    get_breakdown(cur, ru_weight[w-1])
+
+def sp20_pt_grade():
+    print("CYBR-5350 Penetration Testing")
+    print("Canvas grade book not updated, cannot perform breakdown")
+    return
 
 ### END cLASSES ###
 
