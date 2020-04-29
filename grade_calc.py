@@ -5,7 +5,7 @@ def main():
     tm = get_term()
 
     fa19_index = list(i for i in range(1,8)) # list of 1-7
-    sp20_index = list(i for i in range(1,5)) # list of 1-4
+    sp20_index = list(i for i in range(1,6)) # list of 1-5
 
     if tm == 1:
         show_classes()
@@ -40,6 +40,8 @@ def main():
             sp20_ru_grade()
         elif cl == 4:
             sp20_pt_grade()
+        elif cl == 5:
+            sp20_os_grade()
 
 
 def show_terms():
@@ -63,6 +65,7 @@ def show_sp20_classes():
     print("\t2. CSCI-4113 [Linux System Administration]")
     print("\t3. RUSS-3241 [Russian Sci-Fi]")
     print("\t4. CYBR-5350 [Penetration Testing]")
+    print("\t5. CSCI-3753 [Operating Systems]")
 
 def get_term():
     while True:
@@ -103,6 +106,7 @@ ai_weight = [0.4, 0.2, 0.2, 0.05, 0.05, 0.1] # homework, midterm, endterm, quizl
 li_weight = [0.3, 0.15, 0.15, 0.1, 0.3] # labs, midterm, endterm, attendence, practical
 ru_weight = [0.4, 0.1, 0.15, 0.15, 0.2] # reading, attendence, exam 1, exam 2, final
 # pt_weight = [0.3, 0.3, 0.3, 0.1] # assignments, midterm, endterm, final
+sp20_os_weight = [0.1, 0.1, 0.4, 0.2, 0.2] # quizzes, problem sets, programming assignments, midterm, final
 
 # cutoffs:
 aa = 93
@@ -297,6 +301,22 @@ def sp20_pt_grade():
     print("CYBR-5350 Penetration Testing")
     print("Canvas grade book not updated, cannot perform breakdown")
     return
+
+def sp20_os_grade():
+    print("\nCSCI-3753 Operating Systems")
+    print("Enter your grade for each category. Example: '87'")
+    w = len(sp20_os_weight)
+    q = float(input("quiz average: "))
+    ps = float(input("problem set average: "))
+    pa = float(input("programming assignment average: "))
+    m = float(input("midterm grade: "))
+    f = 0
+
+    distribution = [q, ps, pa, m, f]
+    cur = 0
+    for c in range(w-1):
+        cur += (distribution[c] * sp20_os_weight[c])
+    get_breakdown(cur, sp20_os_weight[w-1])
 
 ### END cLASSES ###
 
