@@ -1,28 +1,47 @@
 # CSCI-3753 Operating Systems
 
 def main():
-    show_classes()
-    cl = get_inp()
+    show_terms()
+    tm = get_term()
 
-    if cl == '1':
-        os_grade()
-    elif cl == '2':
-        pl_grade()
-    elif cl == '3':
-        ds_grade()
-    elif cl == '4':
-        ro_grade()
-    elif cl == '5':
-        hc_grade()
-    elif cl == '6':
-        ai_grade()
-    elif cl == '7':
-        df_grade()
-    elif cl == '8':
-        tc_grade()
-    elif cl == '9':
-        sl_grade()
+    fa19_index = list(i for i in range(1,9)) # list of 1-8
+    sp20_index = list(i for i in range(1,2)) # list of 1-1
 
+    if tm == 1:
+        show_classes()
+        cl = get_inp(fa19_index)
+    if tm == 2:
+        show_sp20_classes()
+        cl = get_inp(sp20_index)
+
+
+    if tm == 1: # Fall 2019
+        if cl == 1:
+            os_grade()
+        elif cl == 2:
+            pl_grade()
+        elif cl == 3:
+            ds_grade()
+        elif cl == 4:
+            ro_grade()
+        elif cl == 5:
+            hc_grade()
+        elif cl == 6:
+            ai_grade()
+        elif cl == 7:
+            df_grade()
+        elif cl == 8:
+            sl_grade()
+
+    if tm == 2: # Spring 2020
+        if cl == 1:
+            sp20_ai_grade()
+
+
+def show_terms():
+    print("School Term: ")
+    print("\t1. Fall 2019")
+    print("\t2. Spring 2020")
 
 def show_classes():
     print("Classes: ")
@@ -33,16 +52,29 @@ def show_classes():
     print("\t5. CSCI-3002 [Human Computer Interactions]")
     print("\t6. CSCI-3202 [Intro to AI]")
     print("\t7. CYBR-5830 [Digital Forensics]")
-    print("\t8. WRTG-3035 [Technical Communication and Design]")
-    print("\t9. ASTR-2040 [Search for Life in the Universe]")
+    print("\t8. ASTR-2040 [Search for Life in the Universe]")
 
+def show_sp20_classes():
+    print("Classes: ")
+    print("\t1. CSCI-3202 [Intro to AI]")
 
-
-def get_inp():
+def get_term():
     while True:
-        cl = input("\nselect a class (1-9): ")
-        if cl in ('1','2','3','4','5','6','7','8','9'):
-            # print("valid: ", cl)
+        tm = input("\nselect a school term (1-2): ")
+        tm = int(tm)
+        if tm in (1,2):
+            return(tm)
+        else:
+            print("\n~~~invalid, try again~~~\n")
+            show_terms()
+            continue
+
+def get_inp(term_index):
+    # print(term_index)
+    while True:
+        cl = input("\nselect a class (1-{}): ".format(len(term_index)))
+        cl = int(cl)
+        if cl in term_index:
             return(cl)
         else:
             print("\n~~~invalid, try again~~~\n")
@@ -55,10 +87,10 @@ pl_weight = [0.4, 0.4, 0.2] # assignments, midterms, final
 ds_weight = [0.35, 0.2, 0.1, 0.1, 0.05, 0.2] # homework, midterm, practicum 1, practicum 2, quizlets, final
 ro_weight = [0.3, 0.4, 0.05, 0.25] # homework, lab, attendence, final project
 hc_weight = [0.05, 0.2, 0.10, 0.25, 0.4] # participation, assignments, reading, quizzes, project
-ai_weight = []
+ai_weight = [0.4, 0.2, 0.2, 0.05, 0.05, 0.1] # homework, midterm, endterm, quizlets, participation, practicum
 df_weight = [0.1, 0.3, 0.2, 0.2, 0.2] # attendence, projects, labs, midterm, final
-tc_weight = []
 sl_weight = [0.05, 0.25, 0.2, 0.2, 0.3] # attendence, homework, assignments, midterm, final
+# tc_weight = []
 
 # cutoffs:
 aa = 93
@@ -69,10 +101,15 @@ bm = 80
 cp = 78
 cc = 73
 cm = 70
-grds = ['A','A-','B+','B','B-','C+','C','C-']
+dp = 68
+dd = 63
+dm = 60
+grds = ['A','A-','B+','B','B-','C+','C','C-','D+','D','D-']
 
 
 ### CLASSES ###
+
+### FALL 2019 ###
 
 def os_grade():
     print("\nCSCI-3753 Operating Systems")
@@ -171,9 +208,6 @@ def df_grade():
         cur += (distribution[c] * df_weight[c])
     get_breakdown(cur, df_weight[w-1])
 
-def tc_grade():
-    return(print("Writing coming soon"))
-
 def sl_grade():
     print("\nASTR-2040 Search for Life in the Universe")
     print("Enter your grade for each category. Example: '87'")
@@ -190,10 +224,34 @@ def sl_grade():
         cur += (distribution[c] * sl_weight[c])
     get_breakdown(cur, sl_weight[w-1])
 
+def tc_grade():
+    return(print("Writing coming soon"))
+
+
+### Spring 2020 ###
+
+def sp20_ai_grade():
+    w = len(ai_weight)
+    h = float(input("homework average: "))
+    m = float(input("midterm exam: "))
+    e = float(input("endterm exam: "))
+    q = float(input("quizlet average: "))
+    p = float(input("participation: "))
+    f = 0
+
+    distribution = [h, m, e, q, p, f]
+    cur = 0
+    for c in range(w-1):
+        cur += (distribution[c] * ai_weight[c])
+    get_breakdown(cur, ai_weight[w-1])
+
 ### END cLASSES ###
 
 
 def get_breakdown(cur, f):
+
+    faa, fam, fbp, fbb, fbm, fcp, fcc, fcm, fdp, fdd, fdm = 0,0,0,0,0,0,0,0,0,0,0
+
     for i in range(500,0,-1):
         fin = cur + (f * i)
 
@@ -227,8 +285,18 @@ def get_breakdown(cur, f):
                 fcm = 0
         elif cm <= fin < cc:
             fcm = i
+            if fcm <= 1:
+                fdp = 0
+        elif dp <= fin < cm:
+            fdp = i
+            if fdp <= 1:
+                fdd = 0
+        elif dd <= fin < dp:
+            fdd = i
+            if fdd <= 1:
+                fdm = 0
 
-    breakdown = [faa, fam, fbp, fbb, fbm, fcp, fcc, fcm]
+    breakdown = [faa, fam, fbp, fbb, fbm, fcp, fcc, fcm, fdp, fdd, fdm]
     print('\nClass grade based on final exam score:')
     for i in range(len(breakdown)):
         print(grds[i], '\t', breakdown[i])
